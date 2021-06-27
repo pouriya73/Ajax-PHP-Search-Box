@@ -1,0 +1,26 @@
+<div class="col-md-12">
+  <div class="search-box">
+      <input type="text" class="form-control" id="inviter_id" name="inviter_id" value="" placeholder="">
+      <div class="result"></div>
+  </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('.search-box input[type="text"]').on("keyup input", function() {
+            /* Get input value on change */
+            var inputVal = $(this).val();
+            var resultDropdown = $(this).siblings(".result");
+            if (inputVal.length) {
+                $.get("ajax.php", {
+                    term: inputVal
+                }).done(function(data) {
+                    // Display the returned data in browser
+                    resultDropdown.html(data);
+                });
+            } else {
+                resultDropdown.empty();
+            }
+        });
+    });
+</script>
